@@ -1,5 +1,4 @@
 package Praktikum10;
-
 public class SingleLinkedList3 {
     Node3 head, tail;
 
@@ -72,6 +71,69 @@ public class SingleLinkedList3 {
             }
         }
     }
+
+    public Mahasiswa3 get(int index) {
+        Node3 temp = head;
+        for (int i = 0; i < index && temp != null; i++) {
+            temp = temp.next;
+        }
+        if (temp != null) return temp.data;
+        else return null;
+    }
+
+    public int indexOf(String nim) {
+        Node3 temp = head;
+        int index = 0;
+        while (temp != null) {
+            if (temp.data.nim.equals(nim)) {
+                return index;
+            }
+            temp = temp.next;
+            index++;
+        }
+        return -1;
+    }
+
+    public void removeFirst() {
+        if (!isEmpty()) {
+            head = head.next;
+            if (head == null) tail = null;
+        } else {
+            System.out.println("List kosong, tidak bisa dihapus");
+        }
+    }
+
+    public void removeLast() {
+        if (!isEmpty()) {
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                Node3 temp = head;
+                while (temp.next != tail) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+                tail = temp;
+            }
+        } else {
+            System.out.println("List kosong, tidak bisa dihapus");
+        }
+    }
+
+    public void remove(int index) {
+        if (index == 0) {
+            removeFirst();
+        } else {
+            Node3 temp = head;
+            for (int i = 0; i < index - 1 && temp != null; i++) {
+                temp = temp.next;
+            }
+            if (temp != null && temp.next != null) {
+                temp.next = temp.next.next;
+                if (temp.next == null) tail = temp;
+            } else {
+                System.out.println("Index di luar batas");
+            }
+        }
+    }
 }
-
-
